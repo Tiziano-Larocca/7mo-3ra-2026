@@ -1,1 +1,1 @@
-Este es el laboratorio 4.
+Este es el trabajo N°4.
