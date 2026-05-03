@@ -1,4 +1,4 @@
-<img width="401" height="156" alt="image" src="https://github.com/user-attachments/assets/eeb83506-b942-4ce1-8972-1b52b507cf7c" /># Laboratorio Docker
+# Laboratorio Docker
 
 ## Ejercicios para repasar
 1. Ejecuta un contenedor a partir de la imagen **hello-word** . Comprobar  que funcione observando la salida del contenedor. Borra el contenedor.
