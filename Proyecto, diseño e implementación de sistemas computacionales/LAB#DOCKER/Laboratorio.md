@@ -1,4 +1,4 @@
-# Laboratorio Docker
+<img width="401" height="156" alt="image" src="https://github.com/user-attachments/assets/eeb83506-b942-4ce1-8972-1b52b507cf7c" /># Laboratorio Docker
 
 ## Ejercicios para repasar
 1. Ejecuta un contenedor a partir de la imagen **hello-word** . Comprobar  que funcione observando la salida del contenedor. Borra el contenedor.
@@ -52,3 +52,12 @@ Crearemos un contenedor con  la imagen de `tomcat`, el contenedor se debe llamar
 - Creación del contenedor y comprobación que el contenedor está funcionando.
 - Acceso al servidor web utilizando un navegador web
 - Eliminar el contenedor.
+
+    - Creamos el servidor tomcat con `docker run -d --name servidor_web -p 8080:8080 tomcat`, la imágen se descarga automáticamente. El contenedor se llama servidor_web y se usa el puerto 8080. No aparece una interfaz web porque no hay una aplicación por defecto subida.
+ 
+        ![img9](img/9.png)
+
+    - Paramos y borramos el contenedor.
+
+        ![img10](img/10.png)
+  
