@@ -2,7 +2,7 @@
 ## Datos del alumno
 - Nombre: Tiziano Larocca
 ## 1. ¿Qué es Docker?
-...
+Docker es una plataforma de contenedores que permite la empaquetación de aplicaciones con sus dependencias en contenedores. A diferencia de una máquina virtual, son extremadamente ligeros ya que comparten el kernel del sistema operativo anfitrión.
 ## 2. Volúmenes en Docker
 ...
 ## 3. Redes en Docker
