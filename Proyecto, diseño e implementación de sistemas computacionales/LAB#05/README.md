@@ -1,6 +1,6 @@
 # TP Docker — MySQL + Java App Server
 ## Datos del alumno
-- Nombre: Cersosimo Vicente
+- Nombre: Tiziano Larocca
 ## 1. ¿Qué es Docker?
 ...
 ## 2. Volúmenes en Docker
