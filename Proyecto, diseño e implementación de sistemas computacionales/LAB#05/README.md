@@ -29,21 +29,21 @@ El archivo init.sql es un script de inicialización para bases de datos. Contien
 ## **Parte 1 — Infraestructura Docker (5 capturas)**
 
 ## 1. Salida de docker --version y docker info en la terminal
-![Versión de Docker](capturas/01-docker-version.png)
+![img1](img/1.png)
 ## 2. Salida de docker network ls mostrando la red java-net
-![Red creada](capturas/02-red-creada.png)
+![img2](img/2.png)
 ## 3. Salida de docker volume inspect mysql-data
-![Volumen MySQL](capturas/03-volumen-creado.png)
+![img3](img/3.png)
 ## 4. Salida de docker ps con ambos contenedores activos
-![Contenedores activos](capturas/04-contenedores-corriendo.png)
+![img4](img/4.png)
 ## 5. docker network inspect java-net con ambos contenedores en la red
-![Inspección de red](capturas/05-network-inspect.png)
+![img51](img/51.png)
 
 ## **Parte 2 — MySQL (3 capturas)**
 ## 6. Logs de MySQL mostrando: ready for connections
-![Logs de MySQL](capturas/06-mysql-logs.png)
+![img5](img/5.png)
 ## 7. Salida de SHOW DATABASES; mostrando la base appdb
-![Bases de datos](capturas/07-mysql-databases.png)
+![img5](img/5.png)
 ## 8. Salida de SELECT * FROM usuarios; con los datos del init.sql
 ![Datos de usuarios](08-mysql-tabla.png)
 
