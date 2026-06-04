@@ -44,22 +44,18 @@ El archivo init.sql es un script de inicialización para bases de datos. Contien
 ![img5](img/5.png)
 ## 7. Salida de SHOW DATABASES; mostrando la base appdb
 ![img6](img/6.png)
-## 8. Salida de SELECT * FROM usuarios; con los datos del init.sql
-![Datos de usuarios](08-mysql-tabla.png)
 
 ## **Parte 3 — Payara Admin Console / GUI (5 capturas)**
-## 9. Pantalla de login de Admin Console en http://localhost:4848
+## 8. Pantalla de login de Admin Console en http://localhost:4848
 ![img8](img/8.png)
-## 10. Dashboard principal de Payara tras iniciar sesión
+## 9. Dashboard principal de Payara tras iniciar sesión
 ![img9](img/9.png)
-## 11. Pantalla del Connection Pool MySQLPool creado
+## 10. Pantalla del Connection Pool MySQLPool creado
 ![img10](img/10.png)
-## 12. Resultado del botón Ping mostrando conexión exitosa a MySQL
-![Ping a MySQL](capturas/12-ping-exitoso.png)
-## 13. JDBC Resource jdbc/MySQLDS visible en la consola
+## 11. JDBC Resource jdbc/MySQLDS visible en la consola
 ![img11](img/11.png)
 ## Parte 4 — Conectividad entre contenedores (1 captura)
-## 14. Salida del ping de Payara hacia mysql-container desde la terminal
+## 12. Salida del ping de Payara hacia mysql-container desde la terminal
 ![img12](img/12.png)
 
 
