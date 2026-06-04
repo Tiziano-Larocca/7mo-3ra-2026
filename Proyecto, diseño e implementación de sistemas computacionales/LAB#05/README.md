@@ -39,13 +39,13 @@ El archivo init.sql es un script de inicialización para bases de datos. Contien
 ## 5. docker network inspect java-net con ambos contenedores en la red
 ![img51](img/51.png)
 
-## **Parte 2 — MySQL (3 capturas)**
+## **Parte 2 — MySQL (2 capturas)**
 ## 6. Logs de MySQL mostrando: ready for connections
 ![img5](img/5.png)
 ## 7. Salida de SHOW DATABASES; mostrando la base appdb
 ![img6](img/6.png)
 
-## **Parte 3 — Payara Admin Console / GUI (5 capturas)**
+## **Parte 3 — Payara Admin Console / GUI (4 capturas)**
 ## 8. Pantalla de login de Admin Console en http://localhost:4848
 ![img8](img/8.png)
 ## 9. Dashboard principal de Payara tras iniciar sesión
