@@ -1,4 +1,8 @@
 # Laboratorio#06 - Construir y desplegar una aplicación con Tomcat
+- Alumno: **Tiziano Larocca**
+- Profesor: **Vicente Cersosimo**
+- Curso: **7mo 3ra**
+- Fecha: **3/06/2026**
 ## Objetivo del proyecto
 Desplegar una aplicación en Tomcat capaz de conectarse a una base de datos MySQL.
 
