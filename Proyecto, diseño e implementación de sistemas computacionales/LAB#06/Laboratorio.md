@@ -12,7 +12,7 @@ Desplegar una aplicación en Tomcat capaz de conectarse a una base de datos MySQ
 
 ![img2](img/2.png)
 
-3. En el archivo `pom.xml` agregamos la dependencia `JDBC`.
+3. En el archivo `pom.xml` agregamos la dependencia `JDBC` para que `Java` pueda comunicarse con MySQL. Sin ella no sería posible la comunicación entre Java y MySQL.
    
 ![img3](img/3.png)
 
