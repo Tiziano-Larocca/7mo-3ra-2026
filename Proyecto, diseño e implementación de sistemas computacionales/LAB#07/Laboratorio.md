@@ -1,4 +1,4 @@
-<img width="1919" height="342" alt="image" src="https://github.com/user-attachments/assets/c9c676f7-0023-493c-a4ee-a7b5e0464ef8" /># Laboratorio Patrón MVC (Model-View-Controller)
+# Laboratorio Patrón MVC (Model-View-Controller)
 
 Alumno: **Tiziano Larocca**
 
@@ -734,6 +734,11 @@ Añadimos un nuevo producto, es un éxito.
 
 Borramos un producto y desaparece de la lista.
 
-![img13](img/13.png)
+![img14](img/14.png)
 
+Por último, buscamos por ID un producto. Funciona.
 
+![img15](img/15.png)
+![img16](img/16.png)
+
+FIN.
