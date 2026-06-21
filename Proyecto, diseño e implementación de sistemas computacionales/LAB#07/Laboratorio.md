@@ -270,6 +270,8 @@ public class ProductoServlet extends HttpServlet {
 
 Aunque se implemente el Servlet, es necesario modificar el archivo web.xml para que Tomcat sepa qué URL deba activar el Servlet.
 
+![img6](img/6.png)
+
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" 
@@ -296,5 +298,402 @@ Aunque se implemente el Servlet, es necesario modificar el archivo web.xml para 
 
 3. ¿Cómo modificaría el Servlet para soportar una acción "editar" que cargue los datos de un producto en el formulario?
     * Para que el Servlet soporte una acción “editar” que cargue los datos de un producto en el formulario se debe agregar el caso “editar” en el switch de doGet() del archivo Servlet para que llame al DAO y el método. En el DAO se debe implementar el método que logre editar los datos del formulario.
+
+## Parte 3 - Vistas: JSP y JSTL
+
+Creamos las páginas JSP que componen la capa Vista. Las JSP utilizarán Expression Language (EL) para acceder a los atributos del request y JSTL para lógica de presentación (iteración, condicionales), sin mezclar código Java con HTML. Los archivos `lista.jsp` y `formulario.jsp` se encontrarán dentro de una carpeta `vistas`. Se implementaron con un style.
+
+![img7](img/7.png)
+
+### Código lista.jsp
+
+```java
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>TechStore — Inventario</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilo.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #0f172a;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #f8fafc;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Barra superior */
+        .acciones {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-nuevo {
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        .btn-nuevo:hover {
+            background-color: #1d4ed8;
+        }
+
+        .form-busqueda {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-busqueda input {
+            padding: 10px;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            background-color: #334155;
+            color: white;
+        }
+
+        .form-busqueda input::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-busqueda button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #475569;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .form-busqueda button:hover {
+            background-color: #64748b;
+        }
+
+        /* Tabla */
+        .tabla-inventario {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #0f172a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tabla-inventario th {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 14px;
+            text-align: left;
+        }
+
+        .tabla-inventario td {
+            padding: 14px;
+            border-top: 1px solid #334155;
+        }
+
+        .tabla-inventario tr:hover {
+            background-color: #1f314a;
+        }
+
+        /* Stock bajo */
+        .stock-bajo {
+            background-color: rgba(220, 38, 38, 0.15);
+        }
+
+        /* Botón eliminar */
+        .btn-eliminar {
+            background-color: #dc2626;
+            color: white;
+            text-decoration: none;
+            padding: 7px 12px;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .btn-eliminar:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Avisos */
+        .aviso {
+            text-align: center;
+            padding: 20px;
+            background-color: #334155;
+            border-radius: 8px;
+            color: #cbd5e1;
+        }
+    </style>
+    <body>
+        <header>
+            <h1>TechStore S.A. — Gestión de Inventario</h1>
+        </header>
+        <main>
+            <div class="acciones">
+                <a href="${pageContext.request.contextPath}/productos?accion=nuevo"
+                   class="btn-nuevo">+ Agregar Producto</a>
+                <form action="${pageContext.request.contextPath}/productos" method="get" class="form-busqueda">
+                    <input type="hidden" name="accion" value="buscar">
+
+                    <input type="text" name="id"
+                           placeholder="Buscar por ID"
+                           value="${param.buscar}">
+
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+
+            <!-- Mensaje si el inventario está vacío -->
+            <c:if test="${empty productos}">
+                <p class="aviso">No hay productos registrados en el sistema.</p>
+            </c:if>
+
+
+            <!-- Tabla de productos -->
+            <c:if test="${not empty productos}">
+                <table class="tabla-inventario">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Nombre</th><th>Categoría</th>
+                            <th>Precio</th><th>Stock</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="prod" items="${productos}">
+                            <tr class="${prod.stock < 10 ? 'stock-bajo' : ''}">
+                                <td>${prod.id}</td>
+                                <td>${prod.nombre}</td>
+                                <td>${prod.categoria}</td>
+                                <td>$<fmt:formatNumber value="${prod.precio}"
+                                                  minFractionDigits="2" maxFractionDigits="2"/></td>
+                                <td>${prod.stock}</td>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/productos?accion=eliminar&id=${prod.id}"
+                                       onclick="return confirm('¿Eliminar ${prod.nombre}?')"
+                                       class="btn-eliminar">Eliminar</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>
+        </main>
+    </body>
+</html>
+```
+
+### Código formulario.jsp
+
+```java
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>TechStore — Nuevo Producto</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilo.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-color: #1e293b;
+        color: #e2e8f0;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #0f172a;
+        border-bottom: 1px solid #334155;
+        padding: 25px;
+        text-align: center;
+    }
+
+    header h1 {
+        color: #f8fafc;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+
+    .formulario {
+        width: 100%;
+        max-width: 650px;
+        background-color: #0f172a;
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid #334155;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .campo {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .campo label {
+        margin-bottom: 8px;
+        color: #cbd5e1;
+        font-weight: 500;
+    }
+
+    .campo input,
+    .campo select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #475569;
+        background-color: #334155;
+        color: #f8fafc;
+        font-size: 15px;
+    }
+
+    .campo input::placeholder {
+        color: #94a3b8;
+    }
+
+    .campo input:focus,
+    .campo select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+    }
+
+    .botones {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .btn-guardar,
+    .btn-cancelar {
+        padding: 12px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .btn-guardar {
+        background-color: #2563eb;
+        color: white;
+        border: none;
+    }
+
+    .btn-guardar:hover {
+        background-color: #1d4ed8;
+        transform: translateY(-1px);
+    }
+
+    .btn-cancelar {
+        background-color: #475569;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn-cancelar:hover {
+        background-color: #64748b;
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 600px) {
+
+        .formulario {
+            padding: 20px;
+        }
+
+        .botones {
+            flex-direction: column;
+        }
+
+        .btn-guardar,
+        .btn-cancelar {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+</style>
+<body>
+  <header><h1>Agregar Nuevo Producto</h1></header>
+  <main>
+    <form action="${pageContext.request.contextPath}/productos" method="post" class="formulario">
+      <div class="campo">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required maxlength="100" placeholder="Ej: Laptop Dell XPS">
+      </div>
+      <div class="campo">
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria" required>
+          <option value="">-- Seleccionar --</option>
+          <option value="Computadoras">Computadoras</option>
+          <option value="Monitores">Monitores</option>
+          <option value="Periféricos">Periféricos</option>
+          <option value="Almacenamiento">Almacenamiento</option>
+          <option value="Redes">Redes</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="precio">Precio (USD):</label>
+        <input type="number" id="precio" name="precio" step="0.01" min="0.01" required placeholder="0.00">
+      </div>
+      <div class="campo">
+        <label for="stock">Cantidad en Stock:</label>
+        <input type="number" id="stock" name="stock" min="0" required placeholder="0">
+      </div>
+      <div class="botones">
+        <button type="submit" class="btn-guardar">Guardar Producto</button>
+        <a href="${pageContext.request.contextPath}/productos" class="btn-cancelar">Cancelar</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
+```
+
 
 
