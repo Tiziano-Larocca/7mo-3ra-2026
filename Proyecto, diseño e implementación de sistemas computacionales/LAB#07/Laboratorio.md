@@ -134,3 +134,13 @@ public class MainTest {
     }
 }
 ```
+
+## Preguntas de reflexión - Capa Modelo
+1. ¿Por qué el DAO usa una lista estática (static)? ¿Qué implicación tiene esto en un servidor con múltiples usuarios concurrentes?
+    * El DAO usa una lista estática para que todos los objetos DAO compartan los mismos datos en memoria, para simular una base de datos simple. En un servidor con múltiples usuarios implica que todos acceden y modifican la lista compartida.
+  
+2. ¿Qué cambios mínimos serían necesarios para que ProductoDAO se conecte a una base de datos MySQL real usando JDBC?
+    * Para que ProductoDAO se conecte a una base de datos MySQL debería agregar el driver JDBC de MySQL en pom.xml, crear la conexión JDBC en ProductoDAO, reemplazar los métodos CRUD para que ejecuten consultas SQL y crear las tablas.
+
+3. ¿Por qué se devuelve new ArrayList<>(inventario) en obtenerTodos() en lugar de devolver la referencia directamente?
+    * Se devuelve new ArrayList<> en vez de devolver la referencia directamente para proteger los datos en el DAO. El código que recibe la lista podría modificar directamente el inventario, lo que rompe el principio del encapsulamiento porque cualquier clase podría alterar el estado interno del DAO. 
