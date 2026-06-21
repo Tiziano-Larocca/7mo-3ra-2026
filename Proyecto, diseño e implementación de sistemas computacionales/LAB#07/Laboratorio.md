@@ -705,3 +705,6 @@ Añadimos la opción buscar en el Servlet.
 
 ![img9](img/9.png)
 
+Agregamos la lógica en el DAO.
+
+![img10](10.png)
