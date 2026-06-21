@@ -699,3 +699,9 @@ Creamos las páginas JSP que componen la capa Vista. Las JSP utilizarán Express
 
 Implementar la funcionalidad de búsqueda por nombre o categoría: agregue un formulario de búsqueda (GET) en lista.jsp, añada un parámetro 'buscar' al Servlet y filtre la lista del DAO usando stream().filter(). La URL resultante debe ser: /productos?accion=listar&buscar=laptop.
 
+Añadimos la opción buscar en el Servlet.
+
+![img8](img/8.png)
+
+![img9](img/9.png)
+
