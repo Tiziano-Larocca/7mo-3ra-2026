@@ -8,7 +8,7 @@ Curso: **7mo 3ra**
 
 ## Objetivo del trabajo
 
-Implementar una aplicación web funcional aplicando el patrón de diseño MVC utilizando Servlets como controladores y JSP como vistas, simulando el módulo de inventario de un sistema de gestión.
+Implementar una aplicación web funcional aplicando el patrón de diseño `MVC` utilizando `Servlets` como controladores y `JSP` como vistas, simulando el módulo de inventario de un sistema de gestión.
 
 ## Parte 1 - Creación del proyecto y capa Modelo
 
@@ -135,6 +135,9 @@ public class MainTest {
 }
 ```
 
+El código funciona correctamente.
+![img4](img/4.png)
+
 ## Preguntas de reflexión - Capa Modelo
 1. ¿Por qué el DAO usa una lista estática (static)? ¿Qué implicación tiene esto en un servidor con múltiples usuarios concurrentes?
     * El DAO usa una lista estática para que todos los objetos DAO compartan los mismos datos en memoria, para simular una base de datos simple. En un servidor con múltiples usuarios implica que todos acceden y modifican la lista compartida.
@@ -147,6 +150,122 @@ public class MainTest {
   
 ## Parte 2 - Controlador Servlet
 
-Ahora implementaremos el Servlet, que actúa como controlador principal de la aplicación. El Servlet interceptará todas las peticiones relacionadas con productos, llamará al DAO correspondiente y decidirá a qué vista redirigir.
+Ahora implementaremos el `Servlet`, que actúa como controlador principal de la aplicación. El Servlet interceptará todas las peticiones relacionadas con productos, llamará al DAO correspondiente y decidirá a qué vista redirigir. Este archivo se encontrará en otro paquete llamado `com.techstore.controlador`
+
+![img5](img/5.png)
+
+### Código ProductoServlet.java
+
+```java
+package com.techstore.controlador;
+
+
+import com.techstore.modelo.Producto;
+import com.techstore.modelo.ProductoDAO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+// Mapeo mediante anotación (alternativa a web.xml)
+@WebServlet("/productos")
+public class ProductoServlet extends HttpServlet {
+
+
+    private ProductoDAO dao = new ProductoDAO();
+
+
+    // ── GET: mostrar lista o formulario ──────────────────────────
+    @Override
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse resp)
+            throws ServletException, IOException {
+
+
+        String accion = req.getParameter("accion");
+        if (accion == null) accion = "listar";
+
+
+        switch (accion) {
+            case "listar":
+                listar(req, resp);
+                break;
+            case "nuevo":
+                req.getRequestDispatcher(
+                    "/WEB-INF/vistas/formulario.jsp")
+                   .forward(req, resp);
+                break;
+            case "eliminar":
+                eliminar(req, resp);
+                break;
+            case "buscar":
+                buscar(req, resp);
+                break;
+            default:
+                listar(req, resp);
+        }
+    }
+        // ── POST: procesar formulario ─────────────────────────────────
+    @Override
+    protected void doPost(HttpServletRequest req,
+                          HttpServletResponse resp)
+            throws ServletException, IOException {
+        // Patrón PRG: Post → Redirect → Get
+        req.setCharacterEncoding("UTF-8");
+        String nombre    = req.getParameter("nombre");
+        String categoria = req.getParameter("categoria");
+        double precio    = Double.parseDouble(req.getParameter("precio"));
+        int    stock     = Integer.parseInt(req.getParameter("stock"));
+        Producto p = new Producto();
+        p.setNombre(nombre);
+        p.setCategoria(categoria);
+        p.setPrecio(precio);
+        p.setStock(stock);
+        dao.agregar(p);
+        // Redirect evita reenvío del formulario (PRG)
+        resp.sendRedirect(req.getContextPath() + "/productos");
+    }
+    // ── Métodos privados auxiliares ───────────────────────────────
+    private void listar(HttpServletRequest req,
+                        HttpServletResponse resp)
+            throws ServletException, IOException {
+        List<Producto> lista = dao.obtenerTodos();
+        req.setAttribute("productos", lista);
+        req.getRequestDispatcher("/WEB-INF/vistas/lista.jsp")
+           .forward(req, resp);
+    }
+    private void eliminar(HttpServletRequest req,
+                          HttpServletResponse resp)
+            throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        dao.eliminar(id);
+        resp.sendRedirect(req.getContextPath() + "/productos");
+    }
+    private void buscar(HttpServletRequest req,
+                    HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        int id = Integer.parseInt(req.getParameter("id"));
+
+        Producto producto = dao.obtenerPorId(id);
+
+        List<Producto> lista = new ArrayList<>();
+
+        if (producto != null) {
+            lista.add(producto);
+        }
+
+        req.setAttribute("productos", lista);
+
+        req.getRequestDispatcher("/WEB-INF/vistas/lista.jsp")
+           .forward(req, resp);
+    }
+}
+```
 
 
