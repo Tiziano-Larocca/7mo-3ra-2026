@@ -269,3 +269,32 @@ public class ProductoServlet extends HttpServlet {
 ```
 
 Aunque se implemente el Servlet, es necesario modificar el archivo web.xml para que Tomcat sepa qué URL deba activar el Servlet.
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <!-- 1. Atributos descriptivos primero -->
+    <display-name>TechStore Inventario</display-name>
+
+    <!-- 2. Páginas de bienvenida al final -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
+```
+
+1. Explique con sus palabras por qué se usa sendRedirect() después del doPost() en lugar de forward(). ¿Qué problema específico soluciona?
+    * Se usa sendRedirect() después de doPost() en lugar de forward() para aplicar el patrón PRG (Post Redirect Get). Después de guardar el producto, el navegador recibe una redirección y realiza una nueva petición GET a  /productos. Esto soluciona la duplicación de datos. Si se usa forward() al refrescar el navegador podría reenviar el formulario POST y volver a insertar el mismo producto.
+
+2. ¿Cuál es la diferencia entre req.setAttribute() y req.getSession().setAttribute()? ¿Cuándo usaría cada uno?
+    * Con req.setAttribute() los datos sólo existen en la petición actual y se eliminan cuando termina, se usaría cuando solo se requiere mostrar una lista. En req.getSession().setAttribute() los datos permanecen durante toda la sesión del usuario, se usa para la información que debe mantenerse en solicitudes como un carrito de compras o un logueo de usuario.
+
+3. ¿Cómo modificaría el Servlet para soportar una acción "editar" que cargue los datos de un producto en el formulario?
+    * Para que el Servlet soporte una acción “editar” que cargue los datos de un producto en el formulario se debe agregar el caso “editar” en el switch de doGet() del archivo Servlet para que llame al DAO y el método. En el DAO se debe implementar el método que logre editar los datos del formulario.
+
+
