@@ -708,3 +708,19 @@ Añadimos la opción buscar en el Servlet.
 Agregamos la lógica en el DAO.
 
 ![img10](10.png)
+
+Por último, se añade el buscador y el botón en el HTML
+
+```html
+<input type="hidden" name="accion" value="buscar">
+
+<input type="text" name="id"
+    placeholder="Buscar por ID"
+    value="${param.buscar}">
+
+<button type="submit">Buscar</button>
+```
+
+
+
+
