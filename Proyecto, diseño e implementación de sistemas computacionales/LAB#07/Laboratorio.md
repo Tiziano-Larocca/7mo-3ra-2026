@@ -1,4 +1,4 @@
-# Laboratorio Patrón MVC (Model-View-Controller)
+<img width="1919" height="342" alt="image" src="https://github.com/user-attachments/assets/c9c676f7-0023-493c-a4ee-a7b5e0464ef8" /># Laboratorio Patrón MVC (Model-View-Controller)
 
 Alumno: **Tiziano Larocca**
 
@@ -721,6 +721,19 @@ Por último, se añade el buscador y el botón en el HTML
 <button type="submit">Buscar</button>
 ```
 
+## Parte final - Prueba
 
+La página levanta correctamente.
+
+![img11](img/11.png)
+
+Añadimos un nuevo producto, es un éxito.
+
+![img12](img/12.png)
+![img13](img/13.png)
+
+Borramos un producto y desaparece de la lista.
+
+![img13](img/13.png)
 
 
