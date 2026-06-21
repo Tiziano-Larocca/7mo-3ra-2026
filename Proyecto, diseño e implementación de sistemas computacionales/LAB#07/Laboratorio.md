@@ -150,7 +150,7 @@ El código funciona correctamente.
   
 ## Parte 2 - Controlador Servlet
 
-Ahora implementaremos el `Servlet`, que actúa como controlador principal de la aplicación. El Servlet interceptará todas las peticiones relacionadas con productos, llamará al DAO correspondiente y decidirá a qué vista redirigir. Este archivo se encontrará en otro paquete llamado `com.techstore.controlador`
+Ahora implementaremos el `Servlet`, que actúa como controlador principal de la aplicación. El Servlet interceptará todas las peticiones relacionadas con productos, llamará al `DAO` correspondiente y decidirá a qué vista redirigir. Este archivo se encontrará en otro paquete llamado `com.techstore.controlador`.
 
 ![img5](img/5.png)
 
@@ -268,4 +268,4 @@ public class ProductoServlet extends HttpServlet {
 }
 ```
 
-
+Aunque se implemente el Servlet, es necesario modificar el archivo web.xml para que Tomcat sepa qué URL deba activar el Servlet.
