@@ -10,7 +10,7 @@ Curso: **7mo 3ra**
 
 Implementar una aplicación web funcional aplicando el patrón de diseño MVC utilizando Servlets como controladores y JSP como vistas, simulando el módulo de inventario de un sistema de gestión.
 
-## Parte 1 - Creación del proyecto y capa modelo
+## Parte 1 - Creación del proyecto y capa Modelo
 
 Creamos el proyecto en `Maven` como web application.
 
@@ -143,4 +143,10 @@ public class MainTest {
     * Para que ProductoDAO se conecte a una base de datos MySQL debería agregar el driver JDBC de MySQL en pom.xml, crear la conexión JDBC en ProductoDAO, reemplazar los métodos CRUD para que ejecuten consultas SQL y crear las tablas.
 
 3. ¿Por qué se devuelve new ArrayList<>(inventario) en obtenerTodos() en lugar de devolver la referencia directamente?
-    * Se devuelve new ArrayList<> en vez de devolver la referencia directamente para proteger los datos en el DAO. El código que recibe la lista podría modificar directamente el inventario, lo que rompe el principio del encapsulamiento porque cualquier clase podría alterar el estado interno del DAO. 
+    * Se devuelve new ArrayList<> en vez de devolver la referencia directamente para proteger los datos en el DAO. El código que recibe la lista podría modificar directamente el inventario, lo que rompe el principio del encapsulamiento porque cualquier clase podría alterar el estado interno del DAO.
+  
+## Parte 2 - Controlador Servlet
+
+Ahora implementaremos el Servlet, que actúa como controlador principal de la aplicación. El Servlet interceptará todas las peticiones relacionadas con productos, llamará al DAO correspondiente y decidirá a qué vista redirigir.
+
+
