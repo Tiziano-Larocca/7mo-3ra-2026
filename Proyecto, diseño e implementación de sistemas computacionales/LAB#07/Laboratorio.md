@@ -979,3 +979,14 @@ INSERT INTO producto (nombre, categoria, precio, stock) VALUES
     ('Monitor Samsung 27"', 'Monitores', 349.99, 8),
     ('Teclado Mecánico Keychron K2', 'Periféricos', 119.99, 25);
 ```
+
+### Conector JDBC de MySQL en pom.xml
+
+```xml
+<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>8.4.0</version>
+</dependency>
+```
+
