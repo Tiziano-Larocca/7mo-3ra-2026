@@ -999,9 +999,15 @@ private IProductoDAO dao = new ProductoDAOMySQL();
 ## Preguntas de reflexión - Escalabilidad
 
 1. ¿Qué otras implementaciones de IProductoDAO podrían crearse a futuro (por ejemplo, conectando a otra fuente de datos)? Mencione al menos dos.
+- Se podrían crear, por ejemplo:
+  - ProductoDAOPostgreSQL: para almacenar los productos en una base de datos PostgreSQL.
+  - ProductoDAOMongoDB: para utilizar una base de datos NoSQL como MongoDB.
 2. En ProductoDAOMySQL, cada método abre y cierra su propia conexión. ¿Qué problema de rendimiento podría generar esto bajo alta concurrencia, y cómo lo resolvería un connection pool (por ejemplo, HikariCP)?
+- Abrir y cerrar una conexión a la base de datos en cada operación consume tiempo y recursos. Si muchos usuarios utilizan la aplicación al mismo tiempo, el servidor podría volverse lento o incluso quedarse sin conexiones disponibles. Un connection pool como HikariCP mantiene un conjunto de conexiones ya abiertas y listas para usar. Cuando un método necesita acceder a la base de datos, toma una conexión del pool y, al terminar, la devuelve para que otro proceso la reutilice.
 3. Si quisiera inyectar la implementación del DAO sin usar new directamente en el Servlet (por ejemplo, mediante un archivo de configuración), ¿qué patrón de diseño aplicaría?
+- Aplicaría el patrón de diseño Factory (Factory Method o Abstract Factory), que crea los objetos según una configuración sin que el Servlet conozca la implementación concreta.
 4. ¿Por qué obtenerTodos() en ProductoDAOMySQL no necesita devolver una copia defensiva de la lista, a diferencia de la versión en memoria?
+- Porque en ProductoDAOMySQL la lista se crea dentro del método cada vez que se realiza la consulta a la base de datos. Esa lista no es compartida ni almacenada como atributo del objeto, por lo que modificarla desde el exterior no afecta los datos reales.
 
 
 
