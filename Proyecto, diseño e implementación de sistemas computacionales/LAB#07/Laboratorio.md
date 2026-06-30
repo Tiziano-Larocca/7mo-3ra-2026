@@ -956,3 +956,26 @@ public class ProductoDAOMySQL implements IProductoDAO {
     }
 }
 ```
+
+### Configuración MySQL para Techstore
+
+```MySQL
+CREATE DATABASE IF NOT EXISTS techstore_db
+    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE techstore_db;
+
+CREATE TABLE producto (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    nombre     VARCHAR(100)   NOT NULL,
+    categoria  VARCHAR(50)    NOT NULL,
+    precio     DECIMAL(10,2)  NOT NULL,
+    stock      INT            NOT NULL DEFAULT 0
+);
+
+INSERT INTO producto (nombre, categoria, precio, stock) VALUES
+    ('Laptop Dell XPS 15', 'Computadoras', 1299.99, 15),
+    ('Mouse Logitech MX Master 3', 'Periféricos', 89.99, 42),
+    ('Monitor Samsung 27"', 'Monitores', 349.99, 8),
+    ('Teclado Mecánico Keychron K2', 'Periféricos', 119.99, 25);
+```
