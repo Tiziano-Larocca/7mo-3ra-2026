@@ -990,3 +990,8 @@ INSERT INTO producto (nombre, categoria, precio, stock) VALUES
 </dependency>
 ```
 
+### Cambio en el controlador
+
+```java
+private IProductoDAO dao = new ProductoDAOMySQL();
+```
