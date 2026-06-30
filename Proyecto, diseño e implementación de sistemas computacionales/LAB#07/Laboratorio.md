@@ -995,3 +995,13 @@ INSERT INTO producto (nombre, categoria, precio, stock) VALUES
 ```java
 private IProductoDAO dao = new ProductoDAOMySQL();
 ```
+
+## Preguntas de reflexión - Escalabilidad
+
+1. ¿Qué otras implementaciones de IProductoDAO podrían crearse a futuro (por ejemplo, conectando a otra fuente de datos)? Mencione al menos dos.
+2. En ProductoDAOMySQL, cada método abre y cierra su propia conexión. ¿Qué problema de rendimiento podría generar esto bajo alta concurrencia, y cómo lo resolvería un connection pool (por ejemplo, HikariCP)?
+3. Si quisiera inyectar la implementación del DAO sin usar new directamente en el Servlet (por ejemplo, mediante un archivo de configuración), ¿qué patrón de diseño aplicaría?
+4. ¿Por qué obtenerTodos() en ProductoDAOMySQL no necesita devolver una copia defensiva de la lista, a diferencia de la versión en memoria?
+
+
+
