@@ -721,7 +721,7 @@ Por último, se añade el buscador y el botón en el HTML
 <button type="submit">Buscar</button>
 ```
 
-## Parte final - Prueba
+## Parte 4 - Prueba
 
 La página levanta correctamente.
 
@@ -741,4 +741,8 @@ Por último, buscamos por ID un producto. Funciona.
 ![img15](img/15.png)
 ![img16](img/16.png)
 
-FIN.
+## Parte final - Integración MySQL
+
+En esta etapa se tiene como objetivo modificar la capa del modelo para que el acceso de datos dependa de una interfaz, permitiendo escalar el proyecto de una lista en memoria a una base de datos real (MySQL) sin modificar el Controlador ni las Vistas.
+
+
