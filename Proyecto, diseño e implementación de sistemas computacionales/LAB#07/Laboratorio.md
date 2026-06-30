@@ -845,3 +845,114 @@ public class ConexionBD {
     }
 }
 ```
+
+### Código ProductoDAOMySQL.java
+
+```java
+package com.techstore.modelo;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProductoDAOMySQL implements IProductoDAO {
+
+    @Override
+    public List<Producto> obtenerTodos() {
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT id, nombre, categoria, precio, stock FROM producto";
+
+        try (Connection con = ConexionBD.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(mapearProducto(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ProductoDAOMySQL.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return lista;
+    }
+
+    @Override
+    public Producto obtenerPorId(int id) {
+        String sql = "SELECT id, nombre, categoria, precio, stock " +
+                     "FROM producto WHERE id = ?";
+
+        try (Connection con = ConexionBD.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapearProducto(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ProductoDAOMySQL.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public void agregar(Producto p) {
+        String sql = "INSERT INTO producto (nombre, categoria, precio, stock) " +
+                     "VALUES (?, ?, ?, ?)";
+
+        try (Connection con = ConexionBD.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(
+                     sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setString(1, p.getNombre());
+            ps.setString(2, p.getCategoria());
+            ps.setDouble(3, p.getPrecio());
+            ps.setInt(4, p.getStock());
+            ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    p.setId(rs.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ProductoDAOMySQL.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+
+    @Override
+    public boolean eliminar(int id) {
+        String sql = "DELETE FROM producto WHERE id = ?";
+
+        try (Connection con = ConexionBD.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ProductoDAOMySQL.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return false;
+    }
+
+    // ── Método privado auxiliar: mapea una fila del ResultSet a Producto ──
+    private Producto mapearProducto(ResultSet rs) throws SQLException {
+        Producto p = new Producto();
+        p.setId(rs.getInt("id"));
+        p.setNombre(rs.getString("nombre"));
+        p.setCategoria(rs.getString("categoria"));
+        p.setPrecio(rs.getDouble("precio"));
+        p.setStock(rs.getInt("stock"));
+        return p;
+    }
+}
+```
