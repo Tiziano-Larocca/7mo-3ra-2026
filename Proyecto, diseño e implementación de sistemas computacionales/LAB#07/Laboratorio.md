@@ -774,3 +774,74 @@ public interface IProductoDAO {
 
 ### Código ProductoDAOMemoria.java
 
+```java
+package com.techstore.modelo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class ProductoDAOMemoria implements IProductoDAO {
+
+    private static List<Producto> inventario = new ArrayList<>();
+    private static AtomicInteger contadorId = new AtomicInteger(1);
+
+    static {
+        inventario.add(new Producto(contadorId.getAndIncrement(),
+            "Laptop Dell XPS 15", "Computadoras", 1299.99, 15));
+        inventario.add(new Producto(contadorId.getAndIncrement(),
+            "Mouse Logitech MX Master 3", "Periféricos", 89.99, 42));
+        inventario.add(new Producto(contadorId.getAndIncrement(),
+            "Monitor Samsung 27\"", "Monitores", 349.99, 8));
+        inventario.add(new Producto(contadorId.getAndIncrement(),
+            "Teclado Mecánico Keychron K2", "Periféricos", 119.99, 25));
+    }
+
+    @Override
+    public List<Producto> obtenerTodos() {
+        return new ArrayList<>(inventario);
+    }
+
+    @Override
+    public Producto obtenerPorId(int id) {
+        return inventario.stream()
+            .filter(p -> p.getId() == id)
+            .findFirst().orElse(null);
+    }
+
+    @Override
+    public void agregar(Producto p) {
+        p.setId(contadorId.getAndIncrement());
+        inventario.add(p);
+    }
+
+    @Override
+    public boolean eliminar(int id) {
+        return inventario.removeIf(p -> p.getId() == id);
+    }
+}
+```
+
+### Código ConexionDB.java
+
+```java
+package com.techstore.modelo;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConexionBD {
+
+    private static final String URL =
+        "jdbc:mysql://localhost:3306/techstore_db";
+    private static final String USUARIO = "root";
+    private static final String CLAVE   = "";
+
+    public static Connection obtenerConexion() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(URL, USUARIO, CLAVE);
+    }
+}
+```
