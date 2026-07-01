@@ -748,7 +748,7 @@ En esta etapa se tiene como objetivo modificar la capa del modelo para que el ac
 ![img17](img/17.png)
 
 ### Descripción de cada archivo nuevo:
-- **IProductoDAO.java:## La interfaz que define los métodos para que luego sean implementados en otros archivos.
+- **IProductoDAO.java:** La interfaz que define los métodos para que luego sean implementados en otros archivos.
 - **ProductoDAOMemoria.java:** Es el archivo antes llamado ProductoDAO.java renombrado. Implementa los métodos de la interfaz IProductoDAO.
 - **ConexionDB.java:** Para evitar repetir la lógica de conexión en cada método, se centraliza en una clase utilitaria dentro del paquete.
 - **ProductoDAOMySQL.java:** Esta es la pieza central del anexo: la misma interfaz IProductoDAO, pero respaldada por una base de datos real en lugar de una lista en memoria.
