@@ -1002,6 +1002,7 @@ private IProductoDAO dao = new ProductoDAOMySQL();
     - Se podrían crear, por ejemplo:
       - ProductoDAOPostgreSQL: para almacenar los productos en una base de datos PostgreSQL.
       - ProductoDAOMongoDB: para utilizar una base de datos NoSQL como MongoDB.
+      
       PostgreSQL y MongoDB son dos sistemas para almacenar datos.
 2. En ProductoDAOMySQL, cada método abre y cierra su propia conexión. ¿Qué problema de rendimiento podría generar esto bajo alta concurrencia, y cómo lo resolvería un connection pool (por ejemplo, HikariCP)?
     - Abrir y cerrar una conexión a la base de datos en cada operación consume tiempo y recursos. Si muchos usuarios utilizan la aplicación al mismo tiempo, el servidor podría volverse lento o incluso quedarse sin              conexiones disponibles. Un connection pool como HikariCP mantiene un conjunto de conexiones ya abiertas y listas para usar. Cuando un método necesita acceder a la base de datos, toma una conexión del pool y, al           terminar, la devuelve para que otro proceso la reutilice.
