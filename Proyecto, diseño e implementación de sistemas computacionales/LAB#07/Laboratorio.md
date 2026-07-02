@@ -1011,5 +1011,12 @@ private IProductoDAO dao = new ProductoDAOMySQL();
 4. ¿Por qué obtenerTodos() en ProductoDAOMySQL no necesita devolver una copia defensiva de la lista, a diferencia de la versión en memoria?
     - Porque en ProductoDAOMySQL la lista se crea dentro del método cada vez que se realiza la consulta a la base de datos. Esa lista no es compartida ni almacenada como atributo del objeto, por lo que modificarla desde        el exterior no afecta los datos reales.
 
+## Parte final - Pruebas finales
 
+Ahora al agregar un nuevo producto, se modifica la base de datos creada.
 
+![img18](img/18.png)
+
+![img19](img/19.png)
+
+FIN
