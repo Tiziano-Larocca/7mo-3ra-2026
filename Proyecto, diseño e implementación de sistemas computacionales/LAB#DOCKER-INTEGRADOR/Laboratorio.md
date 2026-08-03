@@ -112,7 +112,7 @@ docker exec -it web2_nginx nc -zv db_mysql 3306
 
 Además, probamos que las bases de datos solo acepten conexiones desde sus respectivos servidores web.
 
-![img4](img/4.png)
+![img5](img/5.png)
 
 ### Paso 4: Comprobar aislamiento entre redes distintas
 
@@ -122,7 +122,7 @@ Intentamos hacer ping o conectarnos desde web1_apache hacia db_mysql o web2_ngin
 docker exec -it web1_apache ping -c 2 172.18.0.2
 ```
 
-![img5](img/5.png)
+![img4](img/4.png)
 
 ### Paso 5: Verificar resolución de nombres
 
