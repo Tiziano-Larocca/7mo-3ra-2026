@@ -124,24 +124,30 @@ docker exec -it web1_apache ping -c 2 172.18.0.2
 
 ![img5](img/5.png)
 
+### Paso 5: Verificar resolución de nombres
 
+Docker integra un servidor DNS embebido en 127.0.0.11 para resolver los nombres de los contenedores dentro de la misma red bridge personalizada:
 
-8. Del Navegador al Servidor Web:​
-Entras a la web desde el navegador (http://localhost:8080). Docker toma esa petición en la
-computadora y gracias a la redirección de puertos (-p), la reenvía directamente al puerto 80
-del servidor web (apache).
-Dentro de la red virtual de Docker (El "cable" virtual):​
-El paquete de datos pasa del sistema operativo al contenedor atravesando una tarjeta de
-red virtual (veth) y un switch virtual (bridge) que Docker creó en la memoria.
-Del Servidor Web a la Base de Datos:​
-El servidor web le pregunta al DNS interno de Docker en qué IP está db_postgres. Docker le
-responde la IP interna (172.19.0.3) y el servidor web se conecta directamente a la base de
-datos a través de ese mismo switch virtual en el puerto 5432.
-9. Interfaces veth (Virtual Ethernet Pair): Las interfaces veth funcionan en parejas
-interconectadas a modo de "cable de red virtual". Un extremo del par se coloca dentro de la
-red delimitada del contenedor (eth0), mientras que el otro extremo permanece en el
-espacio de red principal del Host. Esto permite conectar el aislamiento del contenedor
-(Network Namespace) con el exterior.
-Red Bridge: El bridge actúa como un conmutador de red (Switch) en software al que se
-conectan todos los extremos de las interfaces veth del host. Permite que los contenedores
-conectados a la misma red bridge se comuniquen entre sí mediante tramas / paquetes IP.
+```
+docker exec -it web1_apache nslookup db_postgres
+```
+
+![img6](img/6.png)
+
+### Paso 6: Verificar servidores por navegadores web
+
+En el navegador web entramos a los servidores por sus respectivos puertos. Es un éxito.
+
+![img7](img/7.png)
+
+![img8](img/8.png)
+
+**Del Navegador al Servidor Web:** Entras a la web desde el navegador (http://localhost:8080). Docker toma esa petición en la computadora y gracias a la redirección de puertos (-p), la reenvía directamente al puerto 80   del servidor web (apache).
+
+**Dentro de la red virtual de Docker** (El cable virtual):​ El paquete de datos pasa del sistema operativo al contenedor atravesando una tarjeta de red virtual (veth) y un switch virtual (bridge) que Docker creó en         la memoria.
+
+**Del Servidor Web a la Base de Datos:​** El servidor web le pregunta al DNS interno de Docker en qué IP está db_postgres. Docker le responde la IP interna (172.19.0.3) y el servidor web se conecta directamente a la        base de datos a través de ese mismo switch virtual en el puerto 5432.
+
+**Interfaces veth (Virtual Ethernet Pair):** Las interfaces veth funcionan en parejas interconectadas a modo de "cable de red virtual". Un extremo del par se coloca dentro de la red delimitada del contenedor (eth0),       mientras que el otro extremo permanece en el espacio de red principal del Host. Esto permite conectar el aislamiento del contenedor (Network Namespace) con el exterior.
+
+**Red Bridge:** El bridge actúa como un conmutador de red (Switch) en software al que se conectan todos los extremos de las interfaces veth del host. Permite que los contenedores conectados a la misma red bridge se        comuniquen entre sí mediante tramas / paquetes IP.
