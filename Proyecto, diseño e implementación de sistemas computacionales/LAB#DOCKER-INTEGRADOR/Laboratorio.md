@@ -1,5 +1,11 @@
 # Redes en Docker - Actividad Integradora
 
+Alumno: **Tiziano Larocca**
+
+Profesor: **Vicente Cersosimo**
+
+Curso: **7mo 3ra** 
+
 ## Cuestionario teórico de investigación
 
 Una vez instalado `docker` ejecuta el siguiente comando
