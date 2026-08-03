@@ -1,24 +1,30 @@
 # Redes en Docker - Actividad Integradora
 
-Redes en Docker - Actividad Integradora
-Cuestionario teórico de investigación
-## Una vez instalado docker ejecuta el siguiente comando
+## Cuestionario teórico de investigación
 
-```bash
+Una vez instalado `docker` ejecuta el siguiente comando
+
+```
 ip addr show
 ```
 
 1. ¿Qué interfaz se crea?
-   - Se crea la interfaz eth0.
+   - Se crea la interfaz `eth0`.
 
 2. ¿Cuál es su función principal?
    - Conectar la red del contenedor con el resto de la red. Es la interfaz por la que se envían y reciben paquetes hacia otros equipos.
 
 3. ¿Cuál es su dirección IP?
-   - Su IP es 172.27.96.247/20 Investiga sobre los namespace, vth pairs y bridge. Dar una explicación breve sobre su funcionalidad y cómo se relaciona con Docker namespace (espacio de nombres): Un namespace es un mecanismo de Linux que aísla recursos de un proceso, como la red, procesos, etc. En el caso de la red, cada contenedor tiene su propio network namespace, con sus propias interfaces, direcciones IP y tabla de rutas. Docker crea un network namespace para cada contenedor Veth pairs: Un veth pair es un par de interfaces de red virtuales conectadas entre sí. Todo paquete que entra por un extremo sale automáticamente por el otro. Cuando Docker crea un contenedor, genera un par de interfaces veth: ●​ Un extremo queda dentro del namespace del contenedor (generalmente como eth0). ●​ El otro extremo permanece en el host y se conecta al bridge de Docker (docker0). De esta manera, el contenedor puede comunicarse con la red del host y con otros contenedores. Bridge: Un bridge es un conmutador (switch) virtual de Linux que conecta varias interfaces de red dentro del mismo equipo. Docker crea por defecto el bridge docker0, al cual conecta los extremos de los veth pairs de todos los contenedores. Levanta un contenedor cualquiera y ejecuta el siguiente comando ip addr show
+   - Su IP es 172.27.96.247/20
 
-4. ¿Qué pasa con las interfaces, hay diferencia con la anterior salida?
-   - Explica la salida y funcionalidad de la evidencia. Al levantar un contenedor Nginx no hay diferencias significativas. Aún aparecen las 2 interfaces anteriores. Esto se debe a que Docker crea un network namespace para cada contenedor con una interfaz de loopback y una interfaz de red virtual (eth0), independientemente de la aplicación que ejecute.
+4. Investiga sobre los `namespace`, `veth pairs` y `bridge`. Dar una explicación breve sobre su funcionalidad y cómo se relaciona con Docker. 
+
+   - **namespace (espacio de nombres):** Un namespace es un mecanismo de Linux que aísla recursos de un proceso, como la red, procesos, etc. En el caso de la red, cada contenedor tiene su propio network namespace, con sus        propias interfaces, direcciones IP y tabla de rutas. Docker crea un network namespace para cada contenedor.
+   - **Veth pairs:** Un veth pair es un par de interfaces de red virtuales conectadas entre sí. Todo paquete que entra por un extremo sale automáticamente por el otro. Cuando Docker crea un contenedor, genera un par de           interfaces veth:​ Un extremo queda dentro del namespace del contenedor (generalmente como eth0). El otro extremo permanece en el host y se conecta al bridge de Docker (docker0). De esta manera, el contenedor puede          comunicarse con la red del host y con otros contenedores.
+   - **Bridge:** Un bridge es un conmutador (switch) virtual de Linux que conecta varias interfaces de red dentro del mismo equipo. Docker crea por defecto el bridge docker0, al cual conecta los extremos de los veth pairs        de todos los contenedores. Levanta un contenedor cualquiera y ejecuta el siguiente comando ip addr show.
+
+5. ¿Qué pasa con las interfaces, hay diferencia con la anterior salida? Explica la salida y funcionalidad de la evidencia. 
+      - Al levantar un contenedor Nginx no hay diferencias significativas. Aún aparecen las 2 interfaces anteriores. Esto se debe a que Docker crea un network namespace para cada contenedor con una interfaz de loopback y          una interfaz de red virtual (eth0), independientemente de la aplicación que ejecute.
 
 ## P1. ¿Qué diferencias existen entre la red bridge por defecto (docker0) y una red bridge
 
