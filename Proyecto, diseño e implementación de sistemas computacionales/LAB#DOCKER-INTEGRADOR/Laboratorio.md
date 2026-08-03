@@ -54,6 +54,10 @@ ip addr show
 
    - Recomendaría ipvlan por sobre macvlan cuando la infraestructura de red tiene limitaciones en la cantidad de direcciones MAC que puede aprender un switch gestionado o cuando se desea evitar problemas asociados a un       gran número de direcciones MAC. Con macvlan, cada contenedor recibe una dirección MAC única, por lo que un host con muchos contenedores puede hacer que el switch deba almacenar cientos o miles de direcciones MAC.
 
+## Escenario práctico
+Una empresa necesita desplegar un entorno de pruebas utilizando Docker con la siguiente infraestructura:
+
+
 
 8. Del Navegador al Servidor Web:​
 Entras a la web desde el navegador (http://localhost:8080). Docker toma esa petición en la
