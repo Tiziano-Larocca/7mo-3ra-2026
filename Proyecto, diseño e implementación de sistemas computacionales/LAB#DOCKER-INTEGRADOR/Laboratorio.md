@@ -57,6 +57,73 @@ ip addr show
 ## Escenario práctico
 Una empresa necesita desplegar un entorno de pruebas utilizando Docker con la siguiente infraestructura:
 
+![escenario](img/escenario.png)
+
+### Paso 1: Crear las redes Docker
+
+Se crean dos redes de tipo bridge independientes.
+
+```
+docker network create --driver bridge --subnet 172.19.0.0/16 red_postgres
+docker network create --driver bridge --subnet 172.18.0.0/16 red_mysql
+```
+
+![img1](img/1.png)
+
+### Paso 2: Crear y asociar contenedores a las redes
+
+Se publican los puertos de los servidores Web hacia la LAN (8080 y 8081)
+
+PostgreSQL
+```
+docker run -d --name db_postgres --network red_postgres -e POSTGRES_PASSWORD=secret postgres:alpine
+```
+
+Apache
+```
+docker run -d --name web1_apache --network red_postgres -p 8080:80 httpd:alpine
+```
+
+MySQL
+```
+docker run -d --name db_mysql --network red_mysql -e MYSQL_ROOT_PASSWORD=secret mysql:latest
+```
+
+Nginx
+```
+docker run -d --name web2_nginx --network red_mysql -p 8081:80 nginx:alpine
+```
+
+![img2](img/2.png)
+
+### Paso 3: Verificar conectividad en la misma red
+
+Probamos que web1_apache puede comunicarse con db_postgres a través del puerto de la base de datos (5432). También probamos que web2_nginx pueda comunmicarse con db_mysql.
+
+```
+docker exec -it web1_apache nc -zv db_postgres 5432
+```
+
+```
+docker exec -it web2_nginx nc -zv db_mysql 3306
+```
+
+![img3](img/3.png)
+
+Además, probamos que las bases de datos solo acepten conexiones desde sus respectivos servidores web.
+
+![img4](img/4.png)
+
+### Paso 4: Comprobar aislamiento entre redes distintas
+
+Intentamos hacer ping o conectarnos desde web1_apache hacia db_mysql o web2_nginx (otra red):
+
+```
+docker exec -it web1_apache ping -c 2 172.18.0.2
+```
+
+![img5](img/5.png)
+
 
 
 8. Del Navegador al Servidor Web:​
