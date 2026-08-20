@@ -27,7 +27,7 @@ media type, etc.
     - Las URIs son la manera de identificar cada recurso (Uniform Resource Identifier). Esto significa que cualquier recurso puede ser
 accesible a través de un URL único.
 6. Menciona tres características importantes de las URIs.
-    - Cada URI apunta a un solo recurso (página, foto, etc.).
+    - Cada URI apunta a un solo recurso.
     - Estructura con un esquema, empieza por un protocolo (http, https, etc.) que indica como leer ese recurso.
     - Funciona como la familia principal que incluye tanto a las URL como a los URN.
 7. ¿Por qué es recomendable usar nombres en plural para las URIs que representan colecciones de recursos?
