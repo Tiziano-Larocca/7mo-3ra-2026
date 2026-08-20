@@ -36,7 +36,9 @@ entidades, es decir, reflejan las tablas en una base de datos.
     - El Controlador actúa como intermediario entre la Vista y el Modelo. Maneja las solicitudes entrantes del usuario, interactúa con el modelo para procesar datos o realizar operaciones de negocio, y luego elige una vista para presentar la salida. En Spring Boot, los controladores se implementan como clases anotadas con @Controller o @RestController. Estas clases utilizan anotaciones como @RequestMapping o variantes para mapear diferentes acciones a métodos
 específicos.
 6. ¿Qué diferencia hay entre un @Controller y un @RestController en Spring Boot?
+    - @RestController, se utiliza principalmente para servicios API donde la respuesta es generalmente JSON o XML, en lugar de una vista HTML. @Controller se usa para devolver vistas visuales como páginas HTML.
 7. Describe el flujo de trabajo de solicitud/respuesta en una aplicación Spring Boot.
+    - Cuando un usuario realiza una solicitud, esta solicitud es manejada por un controlador. El controlador procesa la solicitud, interactúa con el modelo si es necesario, y luego devuelve una respuesta. Esta respuesta puede ser una vista renderizada o datos.
 
 ## Maven:
 1. ¿Qué es Maven y para qué se utiliza en proyectos Spring Boot?
