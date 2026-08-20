@@ -22,12 +22,20 @@ media type, etc.
 
 ## Recursos y URIs
 4. ¿Qué es un recurso en el contexto de una API REST?
+    - Un recurso es cualquier objeto o dato que el sistema puede nombrar, leer, crear o cambiar.
 5. Explica la importancia de las URIs en una API REST.
+    - Las URIs son la manera de identificar cada recurso (Uniform Resource Identifier). Esto significa que cualquier recurso puede ser
+accesible a través de un URL único.
 6. Menciona tres características importantes de las URIs.
+    - Cada URI apunta a un solo recurso (página, foto, etc.).
+    - Estructura con un esquema, empieza por un protocolo (http, https, etc.) que indica como leer ese recurso.
+    - Funciona como la familia principal que incluye tanto a las URL como a los URN.
 7. ¿Por qué es recomendable usar nombres en plural para las URIs que representan colecciones de recursos?
+    - Es recomendable usar nombres en plural para las URIs con colecciones de recursos para diferenciar un grupo de elementos de un recurso único.
 
 ## Métodos HTTP
 8. ¿Cuáles son los métodos HTTP principales utilizados en una API REST y cuál es la función de cada uno?
+    - 
 9. Describe la diferencia entre los métodos POST y PUT.
 10. ¿Qué significa que un método HTTP sea idempotente? Da un ejemplo de un método idempotente.
 
