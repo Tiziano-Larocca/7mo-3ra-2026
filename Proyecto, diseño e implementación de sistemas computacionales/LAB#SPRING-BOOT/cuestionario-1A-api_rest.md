@@ -78,7 +78,7 @@ accesible a través de un URL único.
     - Es una plataforma de desarrollo y pruebas de software que permite interactuar con APIs de forma rápida, visual sin necesidad de escribir código de cliente.
 17. Menciona dos funcionalidades importantes de Postman que facilitan el trabajo con APIs.
     - **Collections:** Agrupa y organiza múltiples peticiones HTTP en carpetas. Funciona como una biblioteca estructurada que se puede guardar, exportar y compartir con el equipo de desarrollo para evitar tener que configurar cada petición desde cero.
-
+    - **Gestión de autenticación:** permite configurar distintos mecanismos de autenticación como API Key, Bearer Token, etc. Para probar endpoints que requieren autorización.
 ## Ejercicios Prácticos
 18. Describe cómo implementarías una operación CRUD (Crear, Leer, Actualizar, Eliminar) en una API REST.
     - Asociaría las operaciones lógicas de la base de datos con los métodos HTTP correctos y las URIs en plural correspondientes.
