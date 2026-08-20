@@ -54,15 +54,41 @@ accesible a través de un URL único.
 
 ## JSON
 13. ¿Por qué es JSON el formato de datos más comúnmente utilizado en las APIs REST?
-    - 
+    - JSON (JavaScript Object Notation) se convertió en el estándar para las APIs REST debido a su equilibrio perfecto entre legibilidad humana y eficiencia.
 14. Explica brevemente la estructura de un objeto JSON.
+    -  Es un formato de texto ligero basado en un sistema de llaves ({ }) que almacena datos en pares de clave y valor.
+       ```json
+       {
+          "usuario": "Juan Pérez",
+          "edad": 30,
+          "activo": true,
+          "habilidades": ["REST", "JSON"]
+        }
+       ```
 15. ¿Qué tipos de datos pueden representarse en JSON?
-
+    - **String**
+    - **Number**
+    - **Boolean**
+    - **Null**
+    - **Object**
+    - **Array**
+      
 ## Postman
 16. ¿Qué es Postman y para qué se utiliza en el desarrollo de APIs?
+    - Es una plataforma de desarrollo y pruebas de software que permite interactuar con APIs de forma rápida, visual sin necesidad de escribir código de cliente.
 17. Menciona dos funcionalidades importantes de Postman que facilitan el trabajo con APIs.
+    - **Collections:** Agrupa y organiza múltiples peticiones HTTP en carpetas. Funciona como una biblioteca estructurada que se puede guardar, exportar y compartir con el equipo de desarrollo para evitar tener que configurar cada petición desde cero.
 
 ## Ejercicios Prácticos
 18. Describe cómo implementarías una operación CRUD (Crear, Leer, Actualizar, Eliminar) en una API REST.
+    - Asociaría las operaciones lógicas de la base de datos con los métodos HTTP correctos y las URIs en plural correspondientes.
 19. ¿Cómo usarías Postman para probar una nueva API que acabas de desarrollar?
+    - Usaría Postman para probar la API de forma progresiva. Verificaría que cada endpoint funciona correctamente y luego casos de error, como IDs inexistentes, formularios sin completar, datos duplicados, etc.
 20. Propone un ejemplo de una API REST para gestionar un catálogo de productos y describe brevemente los endpoints necesarios.
+    - Se podría usar el recurso /Products para gestionar el catálogo de productos. Los endpoints necesarios serían:
+          - **GET /Products**: Obtiene todos los productos.
+          - **GET /Products/{id}**: Obtiene un producto en específico.
+          - **POST /Products**: Crea un nuevo producto.
+          - **DELETE /Products/{id}**: Elimina un producto.
+          - **PUT /Products/{id}**: Actualiza completamente un producto.
+          - **PATCH /Products/{id}**: Actualiza algunos aspectos del producto.
