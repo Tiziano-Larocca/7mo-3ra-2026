@@ -42,7 +42,9 @@ específicos.
 
 ## Maven:
 1. ¿Qué es Maven y para qué se utiliza en proyectos Spring Boot?
+    - Maven es una herramienta de gestión de proyectos y comprensión de software utilizada para manejar dependencias, compilar el proyecto y gestionar el ciclo de vida del software. En proyectos Spring Boot, Maven es comúnmente utilizado para configurar dependencias, plugins y otras configuraciones del proyecto.
 2. ¿Qué tipo de información se define en el archivo `pom.xml` de un proyecto Spring Boot?
+    - En el archivo pom.xml se definen las dependencias del proyecto, la versión de Spring Boot utilizada, plugins y cualquier otra configuración específica de Maven necesaria para el proyecto.
 
 ## Configuración de un Proyecto Básico:
 1. ¿Qué es Spring Initializr y cómo facilita la generación de un proyecto Spring Boot?
