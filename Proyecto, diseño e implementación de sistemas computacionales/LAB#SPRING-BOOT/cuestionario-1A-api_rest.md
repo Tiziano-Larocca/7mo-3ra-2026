@@ -2,8 +2,23 @@
 
 ## Conceptos Básicos
 1. ¿Qué es una API y cuál es su función principal?
+    - Una API (Interfaz de Programación de Aplicaciones) es un conjunto de reglas que permite que diferentes programas puedan comunicarse entre si e intercambien datos.
 2. Define brevemente el estilo arquitectónico REST.
+    - Es una lógica de restricciones / estándar donde se construye una API. Define que:
+        -  El cliente y el servidor deben estar separados.
+        -  El estado necesario para manejar cada request debe estar contenido en el mismo request. No
+se debe guardar session state variables del lado del servidor.
+        - Cada mensaje de respuesta debe especificar explícitamente si puede ser cacheado o no. De
+este modo podemos eliminar algunas interacciones cliente-servidor y prevenir que el cliente use
+data desactualizada.
+        - El cliente no debería poder identificar a qué capa del sistema está conectado.
+        - Los servidores pueden proporcionar código ejecutable (JavaScript) al cliente, permitiendo que
+este código se ejecute en el contexto del cliente.
+        - Establece que el API y el consumidor deben compartir una sola interfaz técnica: URI, métodos,
+media type, etc.
+
 3. ¿Qué significa que una API sea RESTful?
+    - Que una API sea RESTful quiere decir que cumple con todas las restricciones ya mencionadas.
 
 ## Recursos y URIs
 4. ¿Qué es un recurso en el contexto de una API REST?
