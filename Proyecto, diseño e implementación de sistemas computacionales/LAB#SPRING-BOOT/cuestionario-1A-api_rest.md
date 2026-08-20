@@ -35,19 +35,26 @@ accesible a través de un URL único.
 
 ## Métodos HTTP
 8. ¿Cuáles son los métodos HTTP principales utilizados en una API REST y cuál es la función de cada uno?
-    - 
+    - **GET:** Leer información de un recurso.
+    - **POST:** Crear un nuevo recurso.
+    - **DELETE:** Eliminar permanentemente un recurso.
+    - **PUT:** Reemplaza un recurso completo.
+    - **PATCH:** Aplica modificaciones parciales a un recurso.
 9. Describe la diferencia entre los métodos POST y PUT.
+    - POST crea un nuevo recurso. PUT reemplaza por completo un recurso.
 10. ¿Qué significa que un método HTTP sea idempotente? Da un ejemplo de un método idempotente.
-
+    - Un método HTTP es idempotente si realizar la misma petición varias veces seguidas produce el mismo resultado en el servidor que realizarla una sola vez. Un método idempotente es PUT.
 ## Códigos de Estado HTTP
 11. ¿Qué indican los códigos de estado en las respuestas HTTP de una API REST?
+    - Los códigos de estado HTTP indican el resultado de una petición enviada al servidor. Permite saber al cliente si la operación fue exitosa, si hubo un error, etc.
 12. Da un ejemplo de un código de estado para cada una de las siguientes categorías y explica su significado: 
-    - 2xx (Éxito)
-    - 4xx (Errores del cliente)
-    - 5xx (Errores del servidor)
+    - 2xx (Éxito): 201 Created. Significa que se creó un nuevo recurso en el servidor y la petición tuvo éxito.
+    - 4xx (Errores del cliente): 404 Not found. Significa que el servidor no pudo encontrar el recurso solicitado.
+    - 5xx (Errores del servidor): 503 Service Unavailable: Significa que el servidor no se encuentra disponible para manejar la petición por mantenimiento o estar sobrecargado.
 
 ## JSON
 13. ¿Por qué es JSON el formato de datos más comúnmente utilizado en las APIs REST?
+    - 
 14. Explica brevemente la estructura de un objeto JSON.
 15. ¿Qué tipos de datos pueden representarse en JSON?
 
