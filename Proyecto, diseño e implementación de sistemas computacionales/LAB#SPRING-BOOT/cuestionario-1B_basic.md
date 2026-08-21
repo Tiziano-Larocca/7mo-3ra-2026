@@ -52,16 +52,19 @@ específicos.
 proyecto como el nombre, descripción, y tipo de empaquetado (JAR o WAR).
 2. ¿Qué directorios y archivos son importantes en la estructura de un proyecto Spring Boot?
     - Los directorios y archivos importantes en Spring Boot son:
-          - **src/main/java:** Contiene el código fuente de la aplicación.
-          - **com/ejemplo/MiAplicacion.java:** La clase principal que arranca la aplicación Spring Boot.
-          - **com/ejemplo/controlador/SaludoControlador.java:** Un controlador que maneja las solicitudes web y utiliza una vista Mustache para la respuesta.
-          - **src/main/resources:** Alberga los recursos de la aplicación.
-          - **src/main/resources/templates:** Contiene las plantillas Mustache para las vistas.
-          - **src/test/java:** Directorio para el código de prueba de la aplicación.
-          - **application.properties:** Archivo de configuración para propiedades de Spring Boot.
-          - **pom.xml:** Archivo de configuración de Maven que incluye dependencias (como Spring Boot Starter Web y Spring Boot Starter Mustache) y configuración del proyecto.
+        - **src/main/java:** Contiene el código fuente de la aplicación.
+        - **com/ejemplo/MiAplicacion.java:** La clase principal que arranca la aplicación Spring Boot.
+        - **com/ejemplo/controlador/SaludoControlador.java:** Un controlador que maneja las solicitudes web y utiliza una vista Mustache para la respuesta.
+        - **src/main/resources:** Alberga los recursos de la aplicación.
+        - **src/main/resources/templates:** Contiene las plantillas Mustache para las vistas.
+        - **src/test/java:** Directorio para el código de prueba de la aplicación.
+        - **application.properties:** Archivo de configuración para propiedades de Spring Boot.
+        - **pom.xml:** Archivo de configuración de Maven que incluye dependencias (como Spring Boot Starter Web y Spring Boot Starter Mustache) y configuración del proyecto.
 3. ¿Cuál es el propósito del archivo `application.properties` en un proyecto Spring Boot?
+    - Describe cómo estos archivos se utilizan para configurar diferentes aspectos de la aplicación, como configuraciones de base de datos, parámetros de servidor, y otras propiedades personalizadas.
 4. ¿Qué anotación se utiliza para marcar la clase principal de una aplicación Spring Boot y qué funciones realiza?
+    - La clase principal de Spring Boot, se marca generalmente con las anotaciones @SpringBootApplication, que actúa como punto de
+entrada para la ejecución de la aplicación. Esta anotación incluye @Configuration, @EnableAutoConfiguration, y @ComponentScan.
 
 ## Ejemplo Práctico:
 1. Describe la estructura de un proyecto Spring Boot utilizando Mustache para las vistas.
