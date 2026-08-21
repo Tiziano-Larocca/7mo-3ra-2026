@@ -73,5 +73,12 @@ entrada para la ejecución de la aplicación. Esta anotación incluye @Configura
     - **application.properties:** Archivo de configuración para propiedades de Spring Boot.
     - **pom.xml:** Archivo de configuración de Maven que incluye dependencias (como Spring Boot Starter Web y Spring Boot Starter Mustache) y configuración del proyecto.
 2. Explica el propósito del controlador `SaludoControlador.java` en el ejemplo proporcionado.
-    - 
+    - Inyecta datos en la vista, utiliza la instrucción model.addAttribute("mensaje", "Hola, Mundo!"); para enviar un fragmento de texto a la interfaz. La plantilla Mustache podrá pintar ese saludo usando la variable {{mensaje}}. Además, la línea return "saludo"; le indica a Spring Boot que busque un archivo de vista con ese nombre exacto (saludo.mustache) dentro de la carpeta templates/ para mostrárselo al usuario.
 3. ¿Cómo se define una plantilla Mustache y cómo se enlaza con el controlador en Spring Boot?
+    - Una plantilla Mustache es un archivo .mustache ubicado normalmente en /templates. Contiene HTML y variables como {{mensaje}}.
+      El controlador Spring Boot agrega los datos al modelo y devuelve el nombre de la plantilla:
+      ```mustache
+      model.addAttribute("mensaje", "¡Hola!");
+      return "saludo";
+      ```
+      Así, Spring busca saludo.mustache, reemplaza {{mensaje}} por el valor correspondiente y genera el HTML para el usuario.
