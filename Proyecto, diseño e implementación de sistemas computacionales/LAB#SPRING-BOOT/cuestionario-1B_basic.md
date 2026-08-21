@@ -73,4 +73,5 @@ entrada para la ejecución de la aplicación. Esta anotación incluye @Configura
     - **application.properties:** Archivo de configuración para propiedades de Spring Boot.
     - **pom.xml:** Archivo de configuración de Maven que incluye dependencias (como Spring Boot Starter Web y Spring Boot Starter Mustache) y configuración del proyecto.
 2. Explica el propósito del controlador `SaludoControlador.java` en el ejemplo proporcionado.
+    - 
 3. ¿Cómo se define una plantilla Mustache y cómo se enlaza con el controlador en Spring Boot?
