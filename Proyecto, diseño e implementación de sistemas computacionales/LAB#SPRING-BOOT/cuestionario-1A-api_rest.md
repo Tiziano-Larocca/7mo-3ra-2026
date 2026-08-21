@@ -86,9 +86,9 @@ accesible a través de un URL único.
     - Usaría Postman para probar la API de forma progresiva. Verificaría que cada endpoint funciona correctamente y luego casos de error, como IDs inexistentes, formularios sin completar, datos duplicados, etc.
 20. Propone un ejemplo de una API REST para gestionar un catálogo de productos y describe brevemente los endpoints necesarios.
     - Se podría usar el recurso /Products para gestionar el catálogo de productos. Los endpoints necesarios serían:
-          - **GET /Products**: Obtiene todos los productos.
-          - **GET /Products/{id}**: Obtiene un producto en específico.
-          - **POST /Products**: Crea un nuevo producto.
-          - **DELETE /Products/{id}**: Elimina un producto.
-          - **PUT /Products/{id}**: Actualiza completamente un producto.
-          - **PATCH /Products/{id}**: Actualiza algunos aspectos del producto.
+        - **GET /Products**: Obtiene todos los productos.
+        - **GET /Products/{id}**: Obtiene un producto en específico.
+        - **POST /Products**: Crea un nuevo producto.
+        - **DELETE /Products/{id}**: Elimina un producto.
+        - **PUT /Products/{id}**: Actualiza completamente un producto.
+        - **PATCH /Products/{id}**: Actualiza algunos aspectos del producto.
