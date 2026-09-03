@@ -1,0 +1,6 @@
+com\api\product\repository\ProductRepository.class
+com\api\product\service\ProductService.class
+com\api\product\service\ProducServiceImpl.class
+com\api\product\entity\Product.class
+com\api\product\ProductApplication.class
+com\api\product\controller\ProductController.class
