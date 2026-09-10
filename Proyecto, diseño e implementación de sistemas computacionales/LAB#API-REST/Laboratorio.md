@@ -7,7 +7,7 @@ Profesor: **Vicente Cersosimo**
 Curso: **7mo 3ra**
 
 ## Objetivo
-Desarrollar una API REST funcional aplicando una arquitectura por capas. El proyecto deberá separar responsabilidades entre Controller, Service, Repository, DTO y Entity, utilizar JPA para la persistencia y
+Desarrollar una API REST funcional aplicando una arquitectura por capas. El proyecto deberá separar responsabilidades entre Controller, Service, Repository y Entity, utilizar JPA para la persistencia y
 centralizar la configuración en application.yaml.
 
 ### Código ProductController.java (controlador)
