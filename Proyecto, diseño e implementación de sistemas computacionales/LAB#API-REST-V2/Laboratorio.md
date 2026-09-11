@@ -18,9 +18,13 @@ centralizar la configuración en application.yaml.
    -  **Entity:** No solo funciona como clase para crear productos, mapea los atributos a la base de datos para crear la tabla products de db_product;
    -  **Repository:** Se encarga del acceso a la base de datos con métodos como `findAll()`, `findById(id)`, `save`, etc.
    -  **Service:** Es la lógica de la aplicación. Puede modificar entidades, borrarlas, crear, etc.
-3. ¿Por qué no es recomendable devolver directamente una Entity desde el Controller?
-4. ¿Cuál es la diferencia entre Entity y DTO?
-5. ¿Qué función cumple JpaRepository?
-6. ¿Qué ocurre cuando el Service necesita consultar un registro que no existe?
-7. ¿Qué ventajas ofrece application.yaml?
-8. ¿Por qué una API debería devolver diferentes códigos HTTP según 
+2. ¿Por qué no es recomendable devolver directamente una Entity desde el Controller?
+   - Porque podrían exponerse datos internos que no deberían ser vistos. Además, la API no queda atada a la estructura de la base de datos.
+3. ¿Cuál es la diferencia entre Entity y DTO?
+   - Entity mapea sus atributos a la base de datos para crear la tabla products. DTO controla qué datos entran y salen de la base de datos sin exponer datos sensibles.
+4. ¿Qué función cumple JpaRepository?
+   - `JpaRepository` facilita las consultas a la base de datos sin escribir las consultas SQL comunes. Se usan métodos como findAll(), deleteById(), save(), etc.
+5. ¿Qué ocurre cuando el Service necesita consultar un registro que no existe?
+   - Indica que 
+6. ¿Qué ventajas ofrece application.yaml?
+7. ¿Por qué una API debería devolver diferentes códigos HTTP según 
