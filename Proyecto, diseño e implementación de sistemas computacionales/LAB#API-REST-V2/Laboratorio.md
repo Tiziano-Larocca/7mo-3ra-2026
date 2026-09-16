@@ -7,8 +7,8 @@ Profesor: **Vicente Cersosimo**
 Curso: **7mo 3ra**
 
 ## Objetivo
-Desarrollar una API REST funcional aplicando una arquitectura por capas. El proyecto deberá separar responsabilidades entre Controller, Service, Repository, DTO y Entity, utilizar JPA para la persistencia y
-centralizar la configuración en application.yaml.
+Desarrollar una `API REST` funcional aplicando una arquitectura por capas. El proyecto deberá separar responsabilidades entre `Controller`, `Service`, `Repository`, `DTO` y `Entity`, utilizar `JPA` para la persistencia y
+centralizar la configuración en `application.yaml`.
 
 ## Cuestionario
 
@@ -56,3 +56,5 @@ spring.datasource.password=
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.show-sql= true
 ```
+4. Creamos los paquetes necesarios para que funcione la API: `controller`, `dto`, `entity`, `repository` y `service`. Cada uno tiene un rol distinto que se irá explicando conforme se implementen.
+5. 
