@@ -282,3 +282,34 @@ public record ProductDTO(
 
 }
 ```
+
+### Pruebas con Postman
+
+1. Probamos la creacion de un producto (POST).
+
+![img2](img/2.png)
+
+2. Pedimos ver todos los producto (GET).
+
+![img3](img/3.png)
+
+3. Pedimos ver un producto por id. (GET).
+
+![img4](img/4.png)
+
+4. Actualizamos un producto (PUT).
+
+![img5](img/5.png)
+
+5. Borramos un producto (DELETE).
+
+![img6](img/6.png)
+
+El producto desaparece
+
+![img7](img/7.png)
+
+6. Por último, probamos que las validaciones funcionen. Es un éxito.
+
+![img8](img/8.png)
+![img9](img/9.png)
