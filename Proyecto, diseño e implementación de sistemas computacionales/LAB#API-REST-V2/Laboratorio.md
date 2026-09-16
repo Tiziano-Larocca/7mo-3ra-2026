@@ -34,3 +34,8 @@ centralizar la configuración en application.yaml.
         - `POST 201 Created:` se creó un nuevo recurso.
         - `PUT 200 OK:` el recurso fue actualizado correctamente.
         - `DELETE 204 No Content:` el recurso fue eliminado correctamente.
+
+### Construcción de la API
+
+
+
