@@ -37,5 +37,22 @@ centralizar la configuración en application.yaml.
 
 ### Construcción de la API
 
+1. Generamos el proyecto con las dependencias necesarias y lo descomprimimos.
+![img1](img/1.png)
 
+2. Creamos la DB con `MySQL`.
+```MySQL
+CREATE DATABASE db_product;
+```
 
+3. Configuramos el archivo `application.properties`, donde indicamos las configuraciones de la base de datos de la aplicación.
+```properties
+spring.application.name=api-product
+#DATABASE
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/db_product
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.show-sql= true
+```
