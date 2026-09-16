@@ -25,6 +25,12 @@ centralizar la configuración en application.yaml.
 4. ¿Qué función cumple JpaRepository?
    - `JpaRepository` facilita las consultas a la base de datos sin escribir las consultas SQL comunes. Se usan métodos como findAll(), deleteById(), save(), etc.
 5. ¿Qué ocurre cuando el Service necesita consultar un registro que no existe?
-   - Indica que 
-6. ¿Qué ventajas ofrece application.yaml?
-7. ¿Por qué una API debería devolver diferentes códigos HTTP según 
+   - Cuando el Service consulta un registro que no existe lanza un `EntityNotFoundException` para que el controlador luego responda con un `HTTP 404 Not found`.
+6. ¿Qué ventajas ofrece application.yaml?  
+   - `application.yaml` permite configurar la aplicación de forma ordenada, por ejemplo, la conexión a la base de datos, el puerto del servidor o configuraciones de JPA. Facilita cambiar configuraciones sin                       modificar el código.
+7. ¿Por qué una API debería devolver diferentes códigos HTTP según el resultado de la operación?
+   - Porque los códigos HTTP indican al cliente qué ocurrió con la solicitud. Por ejemplo:
+        - `GET → 200 OK:` los datos fueron obtenidos correctamente.
+        - `POST → 201 Created:` se creó un nuevo recurso.
+        - `PUT → 200 OK:` el recurso fue actualizado correctamente.
+        - `DELETE → 204 No Content:` el recurso fue eliminado correctamente.
