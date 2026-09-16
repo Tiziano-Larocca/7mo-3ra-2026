@@ -100,6 +100,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 ```
 
 7. En la capa service creamos una interfaz `ProductService` con los métodos y otra clase `ProductServiceImpl` que implemente los métodos definidos en la interfaz. Se implementan los métodos CRUD definidos en el framework JPA.
+
 **ProductService**
 ```java
 package com.api.product.service;
@@ -187,5 +188,97 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
+}
+```
+
+8. Creamos `ProductController`, el cual manejara las peticiones HTTP y enviará las respuestas necesarias. Invoca la lógica necesaria según la petición. También se encarga de manejar los `endpoint`.
+```java
+package com.api.product.controller;
+
+import jakarta.persistence.EntityNotFoundException;
+import com.api.product.entity.Product;
+import com.api.product.service.ProductService;
+import com.api.product.dto.ProductDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/api/v1")
+@CrossOrigin("*")
+public class ProductController {
+
+    //inject dependency
+    @Autowired
+    private ProductService productService;
+
+    @PostMapping("/products")
+    //method to save product
+    public ResponseEntity<Product> saveProduct(@Valid @RequestBody ProductDTO productDTO) {
+        System.out.println(productDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productDTO));
+    }
+
+    @GetMapping("/products")
+    //method to get all products
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
+    }
+
+    @GetMapping("/products/{id}")
+    //method to get product by id
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @PutMapping("/products/{id}")
+    //method to update product
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
+        System.out.println(id);
+        System.out.println(productDTO);
+        Product existingProduct = productService.getProductById(id);
+        if (existingProduct == null) {
+            throw new EntityNotFoundException("Product not found with id: " + id);
+        }
+        return ResponseEntity.ok(productService.updateProduct(id, productDTO));
+    }
+
+    @DeleteMapping("/products/{id}")
+    //method to delete product
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return ResponseEntity.ok("Product deleted successfully");
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+}
+```
+
+9. Por último creamos la clase `ProductDTO`, la cuál tendrá 2 funciones: Definir que datos entran o salen de la API como por ejemplo, que entre un producto con id, nombre, precio y cantidad. Cuando se pida leerlo que solo se vea el nombre, precio y cantidad. También tendrá la función de las validaciones, las cuales verifican que un producto se cree con determinadas restricciones. Por ejemplo que el nombre tenga más de un caracter.
+```java
+package com.api.product.dto;
+
+import jakarta.validation.constraints.*;
+
+public record ProductDTO(
+        @NotBlank(message = "Name is required")
+        @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+        String name, 
+        
+        @NotNull(message = "Price must be higher than 0")
+        @Positive
+        float price, 
+        
+        @Min(0)
+        @Positive
+        int quantity) {
+
 }
 ```
