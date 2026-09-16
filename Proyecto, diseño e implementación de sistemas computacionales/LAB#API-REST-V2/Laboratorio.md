@@ -57,4 +57,30 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.show-sql= true
 ```
 4. Creamos los paquetes necesarios para que funcione la API: `controller`, `dto`, `entity`, `repository` y `service`. Cada uno tiene un rol distinto que se irá explicando conforme se implementen.
-5. 
+5. Implementamos la clase Product, la cual representan los datos que se guardan en la base de datos. Es como si "mapeara" sus atributos a la DB para crear la tabla products.
+```java
+package com.api.product.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor // Lombok annotation to generate a no-args constructor
+@AllArgsConstructor // Lombok annotation to generate an all-args constructor
+@Data //Lombok annotation to generate setter and getter
+@Entity //JPA annotation to specify entity
+@Table(name = "products") // JPA annotation to specify the table name for this entity
+public class Product {
+    //--------------------------------
+    @Id //JPA annotation to specify primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //JPA annotation to specify auto-increment
+    private Long id; //this attribute is primary key and auto_increment
+    //-----------------------------------
+    private String name;
+    private float price;
+    private int quantity;
+}
+```
+
+6. 
