@@ -261,7 +261,7 @@ public class ProductController {
 }
 ```
 
-9. Por último creamos la clase `ProductDTO`, la cuál tendrá 2 funciones: Definir que datos entran o salen de la API como por ejemplo, que entre un producto con id, nombre, precio y cantidad. Cuando se pida leerlo que solo se vea el nombre, precio y cantidad. También tendrá la función de las validaciones, las cuales verifican que un producto se cree con determinadas restricciones. Por ejemplo que el nombre tenga más de un caracter.
+9. Por último creamos la clase `ProductDTO`, la cuál tendrá 2 funciones: Definir que datos entran o salen de la API como por ejemplo, que entre un producto con id, nombre, precio y cantidad. Cuando se pida leerlo que solo se vea el nombre, precio y cantidad. También tendrá la función de las validaciones, las cuales verifican que un producto se cree con determinadas restricciones. Por ejemplo que el nombre tenga más de un caracter. Importante destacar que los métodos `createProduct` y `updateProduct` deberán recibir objetos ProductDTO.
 ```java
 package com.api.product.dto;
 
