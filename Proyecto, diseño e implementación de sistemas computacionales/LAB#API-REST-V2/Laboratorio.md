@@ -57,7 +57,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.show-sql= true
 ```
 4. Creamos los paquetes necesarios para que funcione la API: `controller`, `dto`, `entity`, `repository` y `service`. Cada uno tiene un rol distinto que se irá explicando conforme se implementen.
-5. Implementamos la clase Product, la cual representan los datos que se guardan en la base de datos. Es como si "mapeara" sus atributos a la DB para crear la tabla products.
+5. Implementamos la clase `Product`, la cual representan los datos que se guardan en la base de datos. Es como si "mapeara" sus atributos a la DB para crear la tabla products.
 ```java
 package com.api.product.entity;
 
@@ -83,4 +83,109 @@ public class Product {
 }
 ```
 
-6. 
+6. Se crea la interfaz `ProductRepository`. Esta se encargará del acceso a la base de datos mediante los métodos CRUD.
+```java
+package com.api.product.repository;
+
+import com.api.product.dto.ProductDTO;
+import com.api.product.entity.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product,Long> {
+
+}
+```
+
+7. En la capa service creamos una interfaz `ProductService` con los métodos y otra clase `ProductServiceImpl` que implemente los métodos definidos en la interfaz. Se implementan los métodos CRUD definidos en el framework JPA.
+**ProductService**
+```java
+package com.api.product.service;
+
+import com.api.product.dto.ProductDTO;
+import com.api.product.entity.Product;
+import java.util.List;
+
+public interface ProductService {
+    //create
+    public Product createProduct(ProductDTO productDTO);
+
+    //read
+    List<Product> getAllProducts();
+    public Product getProductById(Long productId);
+
+    //update
+    public Product updateProduct(Long productId, ProductDTO productDTO);
+
+    //delete
+    public Product deleteProductById(Long productId);
+
+}
+```
+
+**ProductServiceImpl**
+```java
+package com.api.product.service;
+
+import jakarta.persistence.EntityNotFoundException;
+import com.api.product.dto.ProductDTO;
+import com.api.product.entity.Product;
+import com.api.product.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Override
+    public Product createProduct(ProductDTO productDTO) {
+        Product product = new Product();
+        product.setName(productDTO.name());
+        product.setPrice(productDTO.price());
+        product.setQuantity(productDTO.quantity());
+        return productRepository.save(product);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Product getProductById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id " + productId));
+    }
+
+    @Override
+    public Product updateProduct(Long productId, ProductDTO productDTO) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isPresent()) {
+            Product existingProduct = optionalProduct.get();
+            existingProduct.setName(productDTO.name());
+            existingProduct.setPrice(productDTO.price());
+            existingProduct.setQuantity(productDTO.quantity());
+            return productRepository.save(existingProduct);
+        }
+        return null;
+    }
+
+     @Override
+    public Product deleteProductById(Long productId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isPresent()) {
+            productRepository.deleteById(productId);
+            return optionalProduct.get();
+        }
+        return null;
+    }
+}
+```
